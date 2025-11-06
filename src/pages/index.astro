@@ -1,11 +1,196 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+  <!-- Toggle 'data-theme' via the Theme button below. Defaults to dark. -->
+  <main class="min-h-screen text-base" data-theme="dark">
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/5 bg-black/20">
+      <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+        <a href="#top" class="font-extrabold text-xl tracking-tight text-[var(--color-text)]">RS</a>
+
+        <ul class="hidden md:flex items-center gap-6 font-semibold">
+          <li><a href="#projects" class="hover:opacity-80 text-[var(--color-text)]">Projects</a></li>
+          <li><a href="#about" class="hover:opacity-80 text-[var(--color-text)]">About</a></li>
+          <li><a href="#contact" class="hover:opacity-80 text-[var(--color-text)]">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <a
+            href="/files/finalresume.docx"
+            target="_blank"
+            class="hidden md:inline-block px-4 py-2 rounded-xl border border-[var(--color-line)] text-[var(--color-text)] hover:bg-[var(--color-card)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30 transition"
+          >
+            Resume
+          </a>
+          <button
+            id="theme-toggle"
+            type="button"
+            class="px-3 py-2 rounded-xl bg-[var(--color-card)] border border-[var(--color-line)] text-[var(--color-text)] hover:opacity-90 focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30 transition"
+            aria-label="Toggle theme"
+          >
+            Theme
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="top" class="px-6 py-20 bg-gradient-to-b from-[var(--color-bg-dark)] via-[var(--color-bg-mid)] to-[var(--color-bg-dark)] text-[var(--color-text)] text-center">
+      <div class="max-w-3xl mx-auto flex flex-col items-center gap-6">
+        <h1 class="text-6xl font-extrabold tracking-tight">
+          Hi, I’m <span class="text-[var(--color-primary)]">Ramssen Sony</span>
+        </h1>
+
+        <!-- In Astro, public assets are served from root: /images/... -->
+        <img
+          src="/images/profile.jpeg"
+          alt="Ramssen Sony"
+          class="w-48 h-48 rounded-full border-4 border-[var(--color-primary)] shadow-xl object-cover mb-2"
+        />
+
+        <p class="text-lg text-[var(--color-text-sub)] leading-relaxed max-w-2xl">
+          I build elegant, high-performance mobile & web apps. I care about intuitive UX,
+          clean architecture, and shipping real, reliable products.
+        </p>
+
+        <div class="flex flex-wrap gap-4 justify-center mt-2">
+          <a
+            href="#projects"
+            class="px-6 py-3 rounded-xl bg-[var(--color-#0B1220)] text-[#0B1220] font-semibold shadow-md hover:opacity-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/40 transition"
+          >
+            View My Work
+          </a>
+          <a
+            href="mailto:sonyramssen@outlook.com"
+            class="px-6 py-3 rounded-xl border border-[var(--color-line)] text-[var(--color-text)] font-semibold hover:bg-[var(--color-card)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30 transition"
+          >
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="px-6 py-20 bg-[var(--color-bg-dark)] text-[var(--color-text)]">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Featured Projects</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <article class="group rounded-2xl bg-[var(--color-card)] border border-[var(--color-line)] shadow-sm p-6 hover:shadow-xl transition">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xl font-semibold">Digital Brain</h3>
+              <div class="flex gap-2">
+                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">Flutter</span>
+                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">Node</span>
+              </div>
+            </div>
+            <p class="text-[var(--color-text-sub)] mb-4">
+              Cross-platform app with modular architecture, offline sync, and smooth animations.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="font-medium text-[var(--color-primary)] group-hover:underline">Live Demo →</a>
+              <a href="#" class="font-medium text-[var(--color-primary)]/80 hover:underline">GitHub</a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="group rounded-2xl bg-[var(--color-card)] border border-[var(--color-line)] shadow-sm p-6 hover:shadow-xl transition">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xl font-semibold">Social Analytics</h3>
+              <div class="flex gap-2">
+                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">React</span>
+                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">MongoDB</span>
+              </div>
+            </div>
+            <p class="text-[var(--color-text-sub)] mb-4">
+              Real-time dashboard with stream processing, role-based auth, and responsive charts.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="font-medium text-[var(--color-primary)] group-hover:underline">Case Study →</a>
+              <a href="#" class="font-medium text-[var(--color-primary)]/80 hover:underline">GitHub</a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="group rounded-2xl bg-[var(--color-card)] border border-[var(--color-line)] shadow-sm p-6 hover:shadow-xl transition">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xl font-semibold">Construction</h3>
+              <div class="flex gap-2">
+                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">Next</span>
+                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">Prisma</span>
+              </div>
+            </div>
+            <p class="text-[var(--color-text-sub)] mb-4">
+              Project is under construction — API, CMS, and UI kit in progress.
+            </p>
+            <div class="flex gap-4">
+              <a href="#" class="font-medium text-[var(--color-primary)] group-hover:underline">Plan →</a>
+              <a href="#" class="font-medium text-[var(--color-primary)]/80 hover:underline">GitHub</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="px-6 py-20 bg-[var(--color-bg-mid)] text-[var(--color-text)]">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-4">About Me</h2>
+        <p class="text-[var(--color-text-sub)] mb-6">
+          I specialize in Flutter, React, and Node.js — I enjoy shaping complex problems into intuitive, fast experiences.
+          I value performance, accessibility, and maintainable code.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-3 py-1 rounded-full bg-[var(--color-card)] border border-[var(--color-line)]">Flutter</span>
+          <span class="px-3 py-1 rounded-full bg-[var(--color-card)] border border-[var(--color-line)]">React</span>
+          <span class="px-3 py-1 rounded-full bg-[var(--color-card)] border border-[var(--color-line)]">Node.js</span>
+          <span class="px-3 py-1 rounded-full bg-[var(--color-card)] border border-[var(--color-line)]">Tailwind CSS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="px-6 py-20 bg-[var(--color-bg-dark)] text-[var(--color-text)]">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
+        <form class="flex flex-col gap-4">
+          <input type="text" placeholder="Your Name"
+                 class="p-3 rounded-xl bg-[var(--color-card)] border border-[var(--color-line)] text-[var(--color-text)] placeholder-[var(--color-text-sub)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30" />
+          <input type="email" placeholder="Your Email"
+                 class="p-3 rounded-xl bg-[var(--color-card)] border border-[var(--color-line)] text-[var(--color-text)] placeholder-[var(--color-text-sub)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30" />
+          <textarea placeholder="Your Message" rows="4"
+                 class="p-3 rounded-xl bg-[var(--color-card)] border border-[var(--color-line)] text-[var(--color-text)] placeholder-[var(--color-text-sub)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30"></textarea>
+
+          <button type="submit"
+                  class="px-6 py-3 rounded-xl bg-[var(--color-primary)] text-[#0B1220] font-semibold shadow-md hover:opacity-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/40 transition">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="px-6 py-10 bg-[var(--color-bg-dark)] text-center text-[var(--color-text-sub)]">
+      © 2025 Ramssen Sony — Built with ❤️ using Astro
+    </footer>
+  </main>
+
+  <!-- Theme toggle script: stores preference in localStorage -->
+  <script is:inline>
+    const root = document.querySelector('main');
+    const btn = document.getElementById('theme-toggle');
+    // Default: dark; restore previous choice if present
+    const saved = localStorage.getItem('rs-theme');
+    if (saved) root.setAttribute('data-theme', saved);
+
+    btn?.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('rs-theme', next);
+    });
+  </script>
 </Layout>

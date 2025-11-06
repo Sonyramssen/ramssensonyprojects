@@ -1,0 +1,62 @@
+/* Google Font (clean + modern) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
+
+/* Tailwind layers */
+@import "tailwindcss";
+
+/* ---------- THEME ---------- */
+/* Default (dark) theme variables */
+@theme {
+  --color-primary:    #38BDF8; /* accent */
+  --color-primary-dark:#0284C7;
+
+  --color-bg-dark:    #0F172A; /* gradient start/end */
+  --color-bg-mid:     #1E293B; /* gradient middle */
+  --color-card:       #0B1220; /* surfaces/cards */
+
+  --color-text:       #F8FAFC;
+  --color-text-sub:   #CBD5E1;
+
+  --color-line:       #233044; /* borders */
+}
+
+/* Light theme overrides when main[data-theme='light'] wraps the page */
+main[data-theme='light'] {
+  --color-primary:    #0EA5E9;
+  --color-primary-dark:#0369A1;
+
+  --color-bg-dark:    #F1F5F9; /* light gradient */
+  --color-bg-mid:     #E2E8F0;
+  --color-card:       #FFFFFF;
+
+  --color-text:       #0F172A;
+  --color-text-sub:   #334155;
+
+  --color-line:       #D1D5DB;
+}
+
+/* ---------- BASE ---------- */
+html { scroll-behavior: smooth; }
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--color-text);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text);
+  font-weight: 800;
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: opacity .2s ease, color .2s ease;
+}
+a:hover { opacity: .9; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
