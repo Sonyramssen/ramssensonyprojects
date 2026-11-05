@@ -1,196 +1,2126 @@
----
-import Layout from '../layouts/Layout.astro';
----
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Ramssen Sony is a software engineer in Jacksonville, Florida, building web and mobile applications with Flutter, Java, Node.js, Firebase, and API integrations."
+    />
+    <meta name="theme-color" content="#f7f8f3" />
 
-<Layout>
-  <!-- Toggle 'data-theme' via the Theme button below. Defaults to dark. -->
-  <main class="min-h-screen text-base" data-theme="dark">
-    <!-- Sticky Header -->
-    <header class="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/5 bg-black/20">
-      <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
-        <a href="#top" class="font-extrabold text-xl tracking-tight text-[var(--color-text)]">RS</a>
+    <title>Ramssen Sony | Software Engineer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ramssen Sony | Software Engineer" />
+    <meta property="og:description" content="Web and mobile development, API integrations, and CRM automation. Explore my work and experience." />
+    <meta name="twitter:card" content="summary" />
 
-        <ul class="hidden md:flex items-center gap-6 font-semibold">
-          <li><a href="#projects" class="hover:opacity-80 text-[var(--color-text)]">Projects</a></li>
-          <li><a href="#about" class="hover:opacity-80 text-[var(--color-text)]">About</a></li>
-          <li><a href="#contact" class="hover:opacity-80 text-[var(--color-text)]">Contact</a></li>
-        </ul>
+    <script is:inline>
+      try {
+        const saved = localStorage.getItem("rs-theme");
+        const theme =
+          saved === "dark" || saved === "light" ? saved : "light";
 
-        <div class="flex items-center gap-3">
+        document.documentElement.dataset.theme = theme;
+      } catch (_) {}
+    </script>
+
+    <style is:global>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+      :root {
+        color-scheme: light;
+        --bg: #f7f8f3;
+        --surface: #ffffff;
+        --soft: #ecefe6;
+        --ink: #172c28;
+        --muted: #596b63;
+        --line: #d7dfd5;
+        --accent: #d4f28a;
+        --accent-ink: #172c28;
+        --deep: #173b32;
+        --shadow: 0 20px 60px #173b3210;
+      }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --bg: #101b18;
+        --surface: #182722;
+        --soft: #20352c;
+        --ink: #edf4e8;
+        --muted: #a8b9ae;
+        --line: #34473b;
+        --accent: #d4f28a;
+        --accent-ink: #172c28;
+        --deep: #10241c;
+        --shadow: 0 20px 60px #0002;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "DM Sans", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      button,
+      a,
+      summary {
+        touch-action: manipulation;
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      summary:focus-visible {
+        outline: 3px solid #6b9928;
+        outline-offset: 5px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      .brand {
+        font-family: "Manrope", Arial, sans-serif;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.12;
+        letter-spacing: -0.045em;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: var(--accent-ink);
+      }
+
+      .wrap {
+        width: min(1120px, calc(100% - 64px));
+        margin-inline: auto;
+      }
+
+      .skip {
+        position: fixed;
+        top: -90px;
+        left: 20px;
+        z-index: 100;
+        padding: 12px 20px;
+        background: var(--accent);
+        color: var(--accent-ink);
+      }
+
+      .skip:focus {
+        top: 12px;
+      }
+
+      /* Navigation */
+
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        min-height: 84px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-weight: 800;
+        font-size: 16px;
+        letter-spacing: -0.04em;
+        white-space: nowrap;
+      }
+
+      .brand-mark {
+        display: grid;
+        place-items: center;
+        width: 35px;
+        height: 35px;
+        background: var(--ink);
+        color: var(--bg);
+        border-radius: 50%;
+        font-size: 13px;
+        letter-spacing: -0.04em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 25px;
+        margin-left: auto;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .nav-links a {
+        border-bottom: 1px solid transparent;
+      }
+
+      .nav-links a:hover {
+        border-color: var(--ink);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .theme {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--line);
+        background: transparent;
+        border-radius: 50%;
+      }
+
+      .resume-small {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        font-size: 13px;
+        font-weight: 700;
+        border: 1px solid var(--line);
+        border-radius: 25px;
+      }
+
+      .resume-small svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .mobile-menu {
+        display: none;
+        position: relative;
+      }
+
+      .mobile-menu > summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 8px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font-size: 13px;
+      }
+
+      .mobile-menu > summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .mobile-menu nav {
+        position: absolute;
+        right: 0;
+        top: 45px;
+        min-width: 180px;
+        padding: 10px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .mobile-menu nav a {
+        display: block;
+        padding: 10px;
+      }
+
+      /* Hero */
+
+      .hero {
+        padding: 80px 0 68px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .availability {
+        display: inline-flex;
+        padding: 7px 11px;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        letter-spacing: 0.08em;
+        margin-bottom: 26px;
+      }
+
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #6a982b;
+        box-shadow: 0 0 0 3px #8eb03b17;
+      }
+
+      .hero h1 {
+        max-width: 700px;
+        font-size: clamp(42px, 5.2vw, 65px);
+        font-weight: 800;
+        line-height: 1.08;
+      }
+
+      .hero h1 span {
+        color: var(--muted);
+      }
+
+      .intro {
+        max-width: 490px;
+        margin-top: 23px;
+        color: var(--muted);
+        font-size: 16px;
+      }
+
+      .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 13px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        min-height: 46px;
+        padding: 12px 19px;
+        font-size: 13px;
+        font-weight: 700;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        background: var(--soft);
+      }
+
+      .button.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: var(--accent-ink);
+      }
+
+      .button.primary:hover {
+        background: #c6e477;
+      }
+
+      .button svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 27px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .hero-meta span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .hero-meta svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      /* Profile */
+
+      .profile {
+        position: relative;
+        padding: 24px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+      }
+
+      .profile-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--muted);
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .profile-top span:last-child {
+        padding: 4px 9px;
+        background: var(--soft);
+        border-radius: 20px;
+        font-size: 13px;
+      }
+
+      .profile-photo {
+        display: block;
+        width: 190px;
+        height: 190px;
+        margin: 22px auto;
+        border-radius: 50%;
+        object-fit: cover;
+        background: var(--soft);
+        border: 1px solid var(--line);
+      }
+
+      .profile h2 {
+        font-size: 23px;
+        letter-spacing: -0.04em;
+      }
+
+      .profile .degree {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .profile-lines {
+        margin-top: 18px;
+        border-top: 1px solid var(--line);
+      }
+
+      .profile-line {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 13px;
+      }
+
+      .profile-line span {
+        color: var(--muted);
+      }
+
+      .profile-line strong {
+        font-weight: 600;
+      }
+
+      .profile-links {
+        display: flex;
+        gap: 18px;
+        margin-top: 18px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .profile-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Capabilities */
+
+      .capabilities {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        padding: 25px 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .capability {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .cap-icon {
+        display: grid;
+        place-items: center;
+        width: 35px;
+        height: 35px;
+        flex-shrink: 0;
+        background: var(--soft);
+        border-radius: 8px;
+      }
+
+      .capability h3 {
+        margin: 2px 0 6px;
+        font-size: 13px;
+        letter-spacing: -0.02em;
+      }
+
+      .capability p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      /* Sections */
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 24px;
+        margin-bottom: 30px;
+      }
+
+      .section-heading h2 {
+        margin-top: 10px;
+        font-size: 35px;
+      }
+
+      .section-heading > p {
+        max-width: 290px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .section-number {
+        color: var(--muted);
+        font-size: 13px;
+        letter-spacing: 0.12em;
+      }
+
+      /* Projects */
+
+      .projects {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .project {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .project-art {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 190px;
+        padding: 24px;
+        overflow: hidden;
+        background: var(--soft);
+      }
+
+      .project-featured {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+        align-items: stretch;
+        border-radius: 16px;
+      }
+
+      .project-featured .project-body {
+        min-width: 0;
+        justify-content: center;
+        padding: clamp(24px, 3vw, 40px);
+      }
+
+      .project-featured h3 {
+        font-size: clamp(24px, 2.6vw, 32px);
+      }
+
+      .project-featured p,
+      .project-featured details p,
+      .project-featured details ul {
+        font-size: 14px;
+        line-height: 1.75;
+      }
+
+      .project-featured .project-status {
+        font-size: 11px;
+        line-height: 1.7;
+        letter-spacing: 0.08em;
+      }
+
+      .project-featured .fitlog-preview {
+        height: auto;
+        min-width: 0;
+        padding: clamp(14px, 2vw, 24px);
+        background: #191a18;
+        border-right: 1px solid var(--line);
+      }
+
+      .fitlog-preview img {
+        display: block;
+        width: 100%;
+        max-width: 480px;
+        height: auto;
+        object-fit: contain;
+      }
+
+      .fitlog-preview:focus-visible {
+        outline-offset: -5px;
+      }
+
+      @media (max-width: 720px) {
+        .project-featured {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .project-featured .fitlog-preview {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+          padding: 16px;
+        }
+
+        .project-featured .project-body {
+          padding: 24px;
+        }
+      }
+
+      .screenshot-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 16px;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      .art-two {
+        background: #e2e9ee;
+      }
+
+      .art-three {
+        background: #eee8dc;
+      }
+
+      .db-visual {
+        display: grid;
+        gap: 9px;
+        width: 180px;
+        transform: rotate(-5deg);
+      }
+
+      .db-row {
+        display: grid;
+        grid-template-columns: 28px 1fr 22px;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+        background: #ffffff;
+        border: 1px solid #c7d7dd;
+        border-radius: 6px;
+        box-shadow: 6px 6px 0 #173b3207;
+      }
+
+      .db-row i {
+        height: 5px;
+        background: #bed0d7;
+        border-radius: 3px;
+      }
+
+      .db-row i:first-child {
+        height: 15px;
+        background: #6d8b9a;
+      }
+
+      .chart-visual {
+        display: flex;
+        align-items: flex-end;
+        gap: 9px;
+        width: 180px;
+        height: 100px;
+        padding-left: 12px;
+        border-left: 1px solid #b8b09d;
+        border-bottom: 1px solid #b8b09d;
+      }
+
+      .chart-visual span {
+        flex: 1;
+        height: var(--bar);
+        background: #708b66;
+        border-radius: 4px 4px 0 0;
+      }
+
+      .chart-visual span:nth-child(2n) {
+        background: #aec08c;
+      }
+
+      .project-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 21px;
+      }
+
+      .project-status {
+        margin-bottom: 11px;
+        color: var(--muted);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .project h3 {
+        font-size: 19px;
+        letter-spacing: -0.035em;
+        line-height: 1.2;
+      }
+
+      .project p {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 16px;
+      }
+
+      .tag {
+        padding: 3px 7px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .project details {
+        margin-top: 20px;
+        padding-top: 13px;
+        border-top: 1px solid var(--line);
+      }
+
+      .project summary {
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .project details p {
+        font-size: 13px;
+      }
+
+      .project details ul {
+        margin-bottom: 0;
+        padding-left: 16px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .art-note {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* Experience */
+
+      .experience-section {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .experience-grid {
+        display: grid;
+        grid-template-columns: 0.75fr 1.5fr;
+        gap: 75px;
+      }
+
+      .experience-intro h2 {
+        margin-top: 10px;
+        font-size: 35px;
+      }
+
+      .experience-intro p {
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 27px;
+      }
+
+      .job {
+        position: relative;
+        padding-left: 23px;
+        border-left: 2px solid var(--line);
+      }
+
+      .job::before {
+        content: "";
+        position: absolute;
+        left: -5px;
+        top: 5px;
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+      }
+
+      .job-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+      }
+
+      .job h3 {
+        font-size: 16px;
+        letter-spacing: -0.025em;
+      }
+
+      .job time {
+        color: var(--muted);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      .job-role {
+        margin-top: 6px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .job p:last-child {
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      /* About and skills */
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+      }
+
+      .about h2 {
+        margin-top: 10px;
+        font-size: 35px;
+      }
+
+      .about p {
+        margin-top: 19px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .skills {
+        display: grid;
+        gap: 18px;
+      }
+
+      .skill-row {
+        padding-bottom: 17px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .skill-row h3 {
+        margin-bottom: 9px;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+      }
+
+      .skill-row p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.8;
+      }
+
+      .education {
+        margin-top: 20px;
+        padding-left: 12px;
+        border-left: 3px solid var(--accent);
+        font-size: 13px;
+      }
+
+      .education strong {
+        display: block;
+      }
+
+      .education span {
+        color: var(--muted);
+      }
+
+      /* Contact */
+
+      .contact {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        align-items: center;
+        gap: 40px;
+        padding: 45px;
+        background: var(--deep);
+        color: #f1f7ea;
+        border-radius: 15px;
+      }
+
+      .contact .eyebrow {
+        color: #c4d3bf;
+      }
+
+      .contact h2 {
+        margin-top: 12px;
+        font-size: 35px;
+      }
+
+      .contact p {
+        max-width: 410px;
+        margin-top: 16px;
+        color: #c4d3bf;
+        font-size: 13px;
+      }
+
+      .contact-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .contact-email {
+        padding-bottom: 6px;
+        border-bottom: 1px solid #869f8b;
+        font-size: clamp(14px, 2vw, 20px);
+        font-weight: 600;
+        word-break: break-word;
+      }
+
+      .contact-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .contact .button {
+        border-color: #ffffff30;
+      }
+
+      .contact .button:not(.primary) {
+        color: #f1f7ea;
+      }
+
+      .contact .button:not(.primary):hover {
+        background: #ffffff10;
+      }
+
+      .copy-status {
+        min-height: 16px;
+        color: #c4d3bf;
+        font-size: 13px;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 28px 0 36px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+      }
+
+      /* Responsive layouts */
+
+      @media (min-width: 1500px) {
+        .hero {
+          padding-block: 100px;
+        }
+
+        .hero h1 {
+          font-size: 68px;
+        }
+      }
+
+      @media (max-width: 1000px) {
+        .nav-links {
+          gap: 16px;
+        }
+
+        .nav {
+          gap: 16px;
+        }
+
+        .hero-grid {
+          gap: 30px;
+        }
+
+        .hero h1 {
+          font-size: 49px;
+        }
+
+        .profile {
+          padding: 20px;
+        }
+
+        .projects {
+          gap: 12px;
+        }
+
+        .project-body {
+          padding: 17px;
+        }
+
+        .experience-grid,
+        .about-grid {
+          gap: 40px;
+        }
+
+        .contact {
+          padding: 32px;
+        }
+
+        .brand-name {
+          display: none;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .wrap {
+          width: calc(100% - 36px);
+        }
+
+        .nav {
+          min-height: 69px;
+          gap: 12px;
+        }
+
+        .brand-name {
+          display: block;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .nav-actions {
+          margin-left: auto;
+        }
+
+        .resume-small {
+          display: none;
+        }
+
+        .mobile-menu {
+          display: block;
+        }
+
+        .hero {
+          padding: 40px 0;
+        }
+
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        .hero h1 {
+          font-size: clamp(39px, 9.8vw, 62px);
+        }
+
+        .intro {
+          font-size: 15px;
+        }
+
+        .availability {
+          margin-bottom: 23px;
+          font-size: 13px;
+        }
+
+        .profile {
+          max-width: none;
+        }
+
+        .profile-photo {
+          width: 170px;
+          height: 170px;
+        }
+
+        .hero-meta {
+          gap: 14px;
+          font-size: 13px;
+        }
+
+        .capabilities {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .capability p {
+          font-size: 13px;
+        }
+
+        .capability h3 {
+          font-size: 13px;
+        }
+
+        .section {
+          padding: 48px 0;
+        }
+
+        .section-heading {
+          display: block;
+        }
+
+        .section-heading h2,
+        .experience-intro h2,
+        .about h2 {
+          font-size: 30px;
+        }
+
+        .section-heading > p {
+          max-width: none;
+          margin-top: 14px;
+        }
+
+        .projects {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .project-art {
+          height: 180px;
+        }
+
+        .project-body {
+          padding: 23px;
+        }
+
+        .project p {
+          font-size: 13px;
+        }
+
+        .project h3 {
+          font-size: 22px;
+        }
+
+        .project summary,
+        .project details p,
+        .project details ul {
+          font-size: 13px;
+        }
+
+        .experience-grid,
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .job-top {
+          flex-direction: column;
+          gap: 5px;
+        }
+
+        .job p:last-child {
+          font-size: 13px;
+        }
+
+        .job-role {
+          font-size: 13px;
+        }
+
+        .job time {
+          font-size: 13px;
+        }
+
+        .contact {
+          grid-template-columns: 1fr;
+          gap: 25px;
+          padding: 28px 24px;
+        }
+
+        .contact h2 {
+          font-size: 29px;
+        }
+
+        .contact p {
+          font-size: 13px;
+        }
+
+        .contact-email {
+          font-size: 18px;
+        }
+
+        .footer {
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .skill-row p {
+          font-size: 13px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+
+      @media print {
+        .header,
+        .hero-buttons,
+        .contact-controls,
+        .mobile-menu,
+        .copy-status {
+          display: none;
+        }
+
+        body {
+          background: white;
+          color: black;
+        }
+
+        .wrap {
+          width: 100%;
+        }
+
+        .section,
+        .hero {
+          padding: 20px 0;
+        }
+
+        .profile {
+          box-shadow: none;
+        }
+
+        .contact {
+          background: white;
+          color: black;
+          border: 1px solid #aaaaaa;
+        }
+
+        .contact p,
+        .contact .eyebrow {
+          color: #333333;
+        }
+
+        .projects {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .project-art {
+          height: 100px;
+        }
+
+        .project,
+        .job {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a href="#main" class="skip">Skip to content</a>
+
+    <header class="header">
+      <nav class="nav wrap" aria-label="Main navigation">
+        <a
+          class="brand"
+          href="#top"
+          aria-label="Ramssen Sony, back to top"
+        >
+          <span class="brand-mark">RS</span>
+          <span class="brand-name">Ramssen Sony</span>
+        </a>
+
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="nav-actions">
           <a
-            href="/files/finalresume.docx"
-            target="_blank"
-            class="hidden md:inline-block px-4 py-2 rounded-xl border border-[var(--color-line)] text-[var(--color-text)] hover:bg-[var(--color-card)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30 transition"
+            class="resume-small"
+            href="/files/Ramssen_Sony_Resume_SW_Revised.docx"
+            download
           >
             Resume
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5"
+              ></path>
+            </svg>
           </a>
+
           <button
+            class="theme"
             id="theme-toggle"
             type="button"
-            class="px-3 py-2 rounded-xl bg-[var(--color-card)] border border-[var(--color-line)] text-[var(--color-text)] hover:opacity-90 focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30 transition"
-            aria-label="Toggle theme"
+            aria-label="Switch to dark theme"
+            aria-pressed="false"
           >
-            Theme
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              aria-hidden="true"
+            >
+              <path
+                d="M20.5 13A8.7 8.7 0 0 1 11 3.5 8.7 8.7 0 1 0 20.5 13Z"
+              ></path>
+            </svg>
           </button>
+
+          <details class="mobile-menu">
+            <summary>Menu</summary>
+
+            <nav aria-label="Mobile navigation">
+              <a href="#work">Work</a>
+              <a href="#experience">Experience</a>
+              <a href="#about">About</a>
+              <a href="#contact">Contact</a>
+              <a href="/files/Ramssen_Sony_Resume_SW_Revised.docx" download>
+                Download resume
+              </a>
+            </nav>
+          </details>
         </div>
       </nav>
     </header>
 
-    <!-- Hero -->
-    <section id="top" class="px-6 py-20 bg-gradient-to-b from-[var(--color-bg-dark)] via-[var(--color-bg-mid)] to-[var(--color-bg-dark)] text-[var(--color-text)] text-center">
-      <div class="max-w-3xl mx-auto flex flex-col items-center gap-6">
-        <h1 class="text-6xl font-extrabold tracking-tight">
-          Hi, I’m <span class="text-[var(--color-primary)]">Ramssen Sony</span>
-        </h1>
+    <main id="main">
+      <!-- Hero -->
 
-        <!-- In Astro, public assets are served from root: /images/... -->
-        <img
-          src="/images/profile.jpeg"
-          alt="Ramssen Sony"
-          class="w-48 h-48 rounded-full border-4 border-[var(--color-primary)] shadow-xl object-cover mb-2"
-        />
+      <section
+        class="hero"
+        id="top"
+        aria-labelledby="hero-heading"
+      >
+        <div class="wrap hero-grid">
+          <div>
+            <div class="eyebrow availability">
+              <span class="dot" aria-hidden="true"></span>
+              Open to new opportunities
+            </div>
 
-        <p class="text-lg text-[var(--color-text-sub)] leading-relaxed max-w-2xl">
-          I build elegant, high-performance mobile & web apps. I care about intuitive UX,
-          clean architecture, and shipping real, reliable products.
+            <h1 id="hero-heading">
+              Software engineer.<br />
+              <span>Web, mobile</span><br />
+              &amp; automation.
+            </h1>
+
+            <p class="intro">
+              I’m Ramssen Sony, a Computer Science graduate building
+              web and mobile applications. My work includes Flutter
+              development, Firebase and OpenAI integrations, and
+              CRM automation.
+            </p>
+
+            <div class="hero-buttons">
+              <a class="button primary" href="#work">
+                Explore my work
+                <span aria-hidden="true">↗</span>
+              </a>
+
+              <a
+                class="button"
+                href="/files/Ramssen_Sony_Resume_SW_Revised.docx"
+                download
+              >
+                Download resume
+                <span aria-hidden="true">↓</span>
+              </a>
+            </div>
+
+            <div class="hero-meta">
+              <span>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z"
+                  ></path>
+                  <circle cx="12" cy="10" r="2"></circle>
+                </svg>
+                Jacksonville, FL
+              </span>
+
+              <span>Remote · Hybrid · Onsite</span>
+            </div>
+          </div>
+
+          <aside class="profile" aria-label="Profile overview">
+            <div class="profile-top">
+              <span>Ramssen Sony</span>
+              <span>Software Engineer</span>
+            </div>
+
+            <img
+              class="profile-photo"
+              src="/images/profile.jpeg"
+              alt="Portrait of Ramssen Sony"
+              width="190"
+              height="190"
+              decoding="async"
+            />
+
+            <h2>Ramssen Sony</h2>
+
+            <p class="degree">
+              B.S. Computer Science · University of North Florida
+            </p>
+
+            <div class="profile-lines">
+              <div class="profile-line">
+                <span>Development</span>
+                <strong>Flutter · React Native · Java</strong>
+              </div>
+
+              <div class="profile-line">
+                <span>Automation</span>
+                <strong>Monday.com · CRM workflows</strong>
+              </div>
+
+              <div class="profile-line">
+                <span>Support</span>
+                <strong>Troubleshooting · User assistance</strong>
+              </div>
+            </div>
+
+            <div class="profile-links">
+              <a
+                href="https://github.com/Sonyramssen"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub ↗
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/sonyramssen"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn ↗
+              </a>
+
+              <a href="mailto:sonyramssen@outlook.com">
+                Email ↗
+              </a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Capabilities -->
+
+      <div
+        class="wrap capabilities"
+        aria-label="Areas of experience"
+      >
+        <div class="capability">
+          <span class="cap-icon" aria-hidden="true">⌘</span>
+
+          <div>
+            <h3>Software development</h3>
+            <p>
+              Mobile and web interfaces, API integration,
+              debugging, and testing.
+            </p>
+          </div>
+        </div>
+
+        <div class="capability">
+          <span class="cap-icon" aria-hidden="true">↗</span>
+
+          <div>
+            <h3>CRM &amp; automation</h3>
+            <p>
+              20+ Monday.com automations for account management
+              and customer follow-ups.
+            </p>
+          </div>
+        </div>
+
+        <div class="capability">
+          <span class="cap-icon" aria-hidden="true">＋</span>
+
+          <div>
+            <h3>Technical support</h3>
+            <p>
+              Patient troubleshooting and clear explanations
+              for users.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projects -->
+
+      <section
+        id="work"
+        class="section wrap"
+        aria-labelledby="work-heading"
+      >
+        <div class="section-heading">
+          <div>
+            <span class="section-number">01 / SELECTED WORK</span>
+            <h2 id="work-heading">
+              Selected development work.
+            </h2>
+          </div>
+
+          <p>
+            Client and academic work across mobile applications,
+            backend development, and data-driven interfaces.
+          </p>
+        </div>
+
+        <div class="projects">
+          <article class="project project-featured">
+            <a
+              class="project-art fitlog-preview"
+              href="/images/fitlog-preview.png"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View full-size FitLog screenshots (opens in a new tab)"
+            >
+              <img
+                src="/images/fitlog-preview.png"
+                alt="FitLog app screens showing welcome, training setup, home, workouts, Vibe, progress, and profile."
+                width="546"
+                height="634"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+
+            <div class="project-body">
+              <div class="project-status">
+                Client work · Digital Brain · In development
+              </div>
+
+              <h3>FitLog — fitness tracking app</h3>
+
+              <p>
+                A Flutter fitness and bodybuilding app with workout
+                logging, progress tracking, and personalized meal
+                and workout plans.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Flutter</span>
+                <span class="tag">Dart</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">OpenAI API</span>
+              </div>
+
+              <a
+                class="screenshot-link"
+                href="/images/fitlog-preview.png"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View app screenshots <span aria-hidden="true">↗</span>
+              </a>
+
+              <details>
+                <summary>Explore the project</summary>
+
+                <p>
+                  As a part-time contractor at Digital Brain, I work on
+                  a small team developing FitLog and translating
+                  product requirements into reusable Flutter screens.
+                </p>
+
+                <ul>
+                  <li>
+                    Built workout logging and progress tracking features,
+                    with Firebase for authentication and administration.
+                  </li>
+                  <li>
+                    Integrated the OpenAI API to generate meal plans
+                    and workouts based on users’ goals.
+                  </li>
+                  <li>
+                    Write flutter_test unit tests and debug iOS builds
+                    in Xcode.
+                  </li>
+                </ul>
+              </details>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-art art-two" aria-hidden="true">
+              <div class="db-visual">
+                <div class="db-row">
+                  <i></i><i></i><i></i>
+                </div>
+                <div class="db-row">
+                  <i></i><i></i><i></i>
+                </div>
+                <div class="db-row">
+                  <i></i><i></i><i></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="project-body">
+              <div class="project-status">
+                Academic project · 2022
+              </div>
+
+              <h3>Medical records system</h3>
+
+              <p>
+                A simulated records-management system connecting
+                Java application logic with a relational SQL
+                database.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">SQL</span>
+                <span class="tag">Database design</span>
+              </div>
+
+              <details>
+                <summary>Explore the project</summary>
+
+                <p>
+                  I built backend logic for data processing and
+                  record-management workflows in an academic
+                  setting.
+                </p>
+
+                <ul>
+                  <li>
+                    Designed relational storage for structured
+                    records.
+                  </li>
+                  <li>
+                    Implemented database retrieval and application
+                    workflows.
+                  </li>
+                  <li>
+                    Documented relationships with ER diagrams and
+                    schema planning.
+                  </li>
+                </ul>
+              </details>
+            </div>
+          </article>
+
+          <article class="project">
+            <div class="project-art art-three" aria-hidden="true">
+              <div class="chart-visual">
+                <span style="--bar:35%"></span>
+                <span style="--bar:65%"></span>
+                <span style="--bar:48%"></span>
+                <span style="--bar:85%"></span>
+                <span style="--bar:70%"></span>
+                <span style="--bar:100%"></span>
+              </div>
+            </div>
+
+            <div class="project-body">
+              <div class="project-status">
+                Independent project · 2022
+              </div>
+
+              <h3>Social media analytics</h3>
+
+              <p>
+                An app and website for organizing social media
+                metrics and presenting them in dashboard views.
+              </p>
+
+              <div class="tags">
+                <span class="tag">React Native</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">MongoDB</span>
+              </div>
+
+              <details>
+                <summary>Explore the project</summary>
+
+                <p>
+                  I developed application and web functionality
+                  to aggregate metrics from platforms including
+                  YouTube, Google, and Instagram.
+                </p>
+
+                <ul>
+                  <li>
+                    Organized metrics using MongoDB storage and
+                    queries.
+                  </li>
+                  <li>
+                    Connected data handling with dashboard
+                    interfaces.
+                  </li>
+                  <li>
+                    Focused on a clear flow from collected data
+                    to usable views.
+                  </li>
+                </ul>
+              </details>
+            </div>
+          </article>
+        </div>
+
+        <p class="art-note">
+          FitLog screenshots show the app in development. Other project illustrations are conceptual.
         </p>
+      </section>
 
-        <div class="flex flex-wrap gap-4 justify-center mt-2">
+      <!-- Experience -->
+
+      <section
+        id="experience"
+        class="section experience-section"
+        aria-labelledby="experience-heading"
+      >
+        <div class="wrap experience-grid">
+          <div class="experience-intro">
+            <span class="section-number">02 / EXPERIENCE</span>
+
+            <h2 id="experience-heading">
+              Software delivery.<br />
+              Practical experience.
+            </h2>
+
+            <p>
+              My experience spans software development, CRM
+              configuration, programming support, and customer
+              service.
+            </p>
+
+            <a
+              class="button"
+              style="margin-top:23px"
+              href="/files/Ramssen_Sony_Resume_SW_Revised.docx"
+              download
+            >
+              Download resume
+              <span aria-hidden="true">↓</span>
+            </a>
+          </div>
+
+          <div class="timeline">
+            <article class="job">
+              <div class="job-top">
+                <h3>Digital Brain</h3>
+                <time>Aug 2024 – Present</time>
+              </div>
+
+              <p class="job-role">
+                Software Engineer Contractor · Part-time
+              </p>
+
+              <p>
+                Develop client websites and mobile applications on a small
+                team, including FitLog. Built workout logging and progress
+                tracking features, integrated Firebase and OpenAI APIs,
+                and write Flutter unit tests and debug iOS builds.
+              </p>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>KC Financial</h3>
+                <time>Jan – Apr 2026</time>
+              </div>
+
+              <p class="job-role">
+                CRM Automation Specialist · Remote
+              </p>
+
+              <p>
+                Configured Monday.com CRM boards and built 20+ automations
+                and AI-assisted workflows. Imported and mapped customer
+                records and automated email follow-ups to reduce manual
+                account management.
+              </p>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>University of North Florida</h3>
+                <time>Aug – Dec 2023</time>
+              </div>
+
+              <p class="job-role">Lab Technician</p>
+
+              <p>
+                Supported 20+ students weekly with Java debugging,
+                IDE errors, version control, and code submissions.
+                Explained programming concepts and helped students
+                work through technical issues.
+              </p>
+            </article>
+
+            <article class="job">
+              <div class="job-top">
+                <h3>Publix Super Markets</h3>
+                <time>Apr 2020 – Present</time>
+              </div>
+
+              <p class="job-role">Grocery Specialist</p>
+
+              <p>
+                Provide customer service in a high-volume
+                environment and assist with computer, software,
+                and printer troubleshooting.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+
+      <section
+        id="about"
+        class="section wrap about-grid"
+        aria-labelledby="about-heading"
+      >
+        <div class="about">
+          <span class="section-number">03 / ABOUT</span>
+
+          <h2 id="about-heading">
+            A practical approach<br />
+            to building software.
+          </h2>
+
+          <p>
+            I’m a Computer Science graduate who enjoys understanding
+            how systems work and making them easier for people
+            to use.
+          </p>
+
+          <p>
+            Whether I’m debugging an app, setting up a CRM workflow,
+            or explaining a technical issue, I bring a methodical
+            approach and clear communication. I’m seeking a software
+            engineering role where I can contribute to web and mobile
+            products and continue developing my technical skills.
+          </p>
+
+          <div class="education">
+            <strong>University of North Florida</strong>
+            <span>B.S. Computer Science · December 2023</span>
+          </div>
+
+          <section class="education" aria-labelledby="certifications-heading">
+            <h3 id="certifications-heading" style="font-size:15px; margin-bottom:10px; letter-spacing:0">
+              Certifications
+            </h3>
+            <strong>AI for Work and Life</strong>
+            <span>University of North Florida · November 2025</span>
+          </section>
+        </div>
+
+        <div class="skills" aria-label="Technical skills">
+          <div class="skill-row">
+            <h3>LANGUAGES</h3>
+            <p>
+              Java · JavaScript · Dart · SQL · PHP · C# · C · HTML · CSS
+            </p>
+          </div>
+
+          <div class="skill-row">
+            <h3>DEVELOPMENT &amp; DATA</h3>
+            <p>
+              Flutter · React Native · Node.js · Firebase · Oracle ·
+              MongoDB · OpenAI API
+            </p>
+          </div>
+
+          <div class="skill-row">
+            <h3>TOOLS &amp; WORKFLOWS</h3>
+            <p>
+              Git · GitHub · Xcode · VS Code · IntelliJ IDEA ·
+              Visual Studio · Monday.com
+            </p>
+          </div>
+
+          <div class="skill-row">
+            <h3>TESTING &amp; SUPPORT</h3>
+            <p>
+              flutter_test · Unit testing · Agile/Scrum · Debugging ·
+              Windows · macOS · Linux
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+
+      <section
+        id="contact"
+        class="wrap contact"
+        aria-labelledby="contact-heading"
+      >
+        <div>
+          <div class="eyebrow">
+            <span class="dot" aria-hidden="true"></span>
+            Let’s connect
+          </div>
+
+          <h2 id="contact-heading">Have a role in mind?</h2>
+
+          <p>
+            I’m interested in opportunities in Jacksonville and
+            remote teams. Get in touch to discuss how my experience
+            could contribute to your team.
+          </p>
+        </div>
+
+        <div class="contact-actions">
           <a
-            href="#projects"
-            class="px-6 py-3 rounded-xl bg-[var(--color-#0B1220)] text-[#0B1220] font-semibold shadow-md hover:opacity-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/40 transition"
-          >
-            View My Work
-          </a>
-          <a
+            class="contact-email"
             href="mailto:sonyramssen@outlook.com"
-            class="px-6 py-3 rounded-xl border border-[var(--color-line)] text-[var(--color-text)] font-semibold hover:bg-[var(--color-card)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30 transition"
           >
-            Contact Me
+            sonyramssen@outlook.com ↗
           </a>
+
+          <div class="contact-controls">
+            <a
+              class="button primary"
+              href="mailto:sonyramssen@outlook.com?subject=Let%27s%20connect"
+            >
+              Send an email
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <button
+              class="button"
+              type="button"
+              id="copy-email"
+            >
+              Copy email
+            </button>
+          </div>
+
+          <span
+            id="copy-status"
+            class="copy-status"
+            role="status"
+            aria-live="polite"
+          ></span>
         </div>
+      </section>
+    </main>
+
+    <footer class="footer wrap">
+      <span>
+        © <span id="year">2026</span> Ramssen Sony
+      </span>
+
+      <div class="footer-links">
+        <a
+          href="https://github.com/Sonyramssen"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub ↗
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/sonyramssen"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn ↗
+        </a>
+
+        <a href="#top">Back to top ↑</a>
       </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="px-6 py-20 bg-[var(--color-bg-dark)] text-[var(--color-text)]">
-      <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Featured Projects</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Card 1 -->
-          <article class="group rounded-2xl bg-[var(--color-card)] border border-[var(--color-line)] shadow-sm p-6 hover:shadow-xl transition">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-xl font-semibold">Digital Brain</h3>
-              <div class="flex gap-2">
-                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">Flutter</span>
-                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">Node</span>
-              </div>
-            </div>
-            <p class="text-[var(--color-text-sub)] mb-4">
-              Cross-platform app with modular architecture, offline sync, and smooth animations.
-            </p>
-            <div class="flex gap-4">
-              <a href="#" class="font-medium text-[var(--color-primary)] group-hover:underline">Live Demo →</a>
-              <a href="#" class="font-medium text-[var(--color-primary)]/80 hover:underline">GitHub</a>
-            </div>
-          </article>
-
-          <!-- Card 2 -->
-          <article class="group rounded-2xl bg-[var(--color-card)] border border-[var(--color-line)] shadow-sm p-6 hover:shadow-xl transition">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-xl font-semibold">Social Analytics</h3>
-              <div class="flex gap-2">
-                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">React</span>
-                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">MongoDB</span>
-              </div>
-            </div>
-            <p class="text-[var(--color-text-sub)] mb-4">
-              Real-time dashboard with stream processing, role-based auth, and responsive charts.
-            </p>
-            <div class="flex gap-4">
-              <a href="#" class="font-medium text-[var(--color-primary)] group-hover:underline">Case Study →</a>
-              <a href="#" class="font-medium text-[var(--color-primary)]/80 hover:underline">GitHub</a>
-            </div>
-          </article>
-
-          <!-- Card 3 -->
-          <article class="group rounded-2xl bg-[var(--color-card)] border border-[var(--color-line)] shadow-sm p-6 hover:shadow-xl transition">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="text-xl font-semibold">Construction</h3>
-              <div class="flex gap-2">
-                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">Next</span>
-                <span class="px-2 py-0.5 text-xs rounded-full border border-[var(--color-line)]">Prisma</span>
-              </div>
-            </div>
-            <p class="text-[var(--color-text-sub)] mb-4">
-              Project is under construction — API, CMS, and UI kit in progress.
-            </p>
-            <div class="flex gap-4">
-              <a href="#" class="font-medium text-[var(--color-primary)] group-hover:underline">Plan →</a>
-              <a href="#" class="font-medium text-[var(--color-primary)]/80 hover:underline">GitHub</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="px-6 py-20 bg-[var(--color-bg-mid)] text-[var(--color-text)]">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold mb-4">About Me</h2>
-        <p class="text-[var(--color-text-sub)] mb-6">
-          I specialize in Flutter, React, and Node.js — I enjoy shaping complex problems into intuitive, fast experiences.
-          I value performance, accessibility, and maintainable code.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <span class="px-3 py-1 rounded-full bg-[var(--color-card)] border border-[var(--color-line)]">Flutter</span>
-          <span class="px-3 py-1 rounded-full bg-[var(--color-card)] border border-[var(--color-line)]">React</span>
-          <span class="px-3 py-1 rounded-full bg-[var(--color-card)] border border-[var(--color-line)]">Node.js</span>
-          <span class="px-3 py-1 rounded-full bg-[var(--color-card)] border border-[var(--color-line)]">Tailwind CSS</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="px-6 py-20 bg-[var(--color-bg-dark)] text-[var(--color-text)]">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
-        <form class="flex flex-col gap-4">
-          <input type="text" placeholder="Your Name"
-                 class="p-3 rounded-xl bg-[var(--color-card)] border border-[var(--color-line)] text-[var(--color-text)] placeholder-[var(--color-text-sub)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30" />
-          <input type="email" placeholder="Your Email"
-                 class="p-3 rounded-xl bg-[var(--color-card)] border border-[var(--color-line)] text-[var(--color-text)] placeholder-[var(--color-text-sub)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30" />
-          <textarea placeholder="Your Message" rows="4"
-                 class="p-3 rounded-xl bg-[var(--color-card)] border border-[var(--color-line)] text-[var(--color-text)] placeholder-[var(--color-text-sub)] focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/30"></textarea>
-
-          <button type="submit"
-                  class="px-6 py-3 rounded-xl bg-[var(--color-primary)] text-[#0B1220] font-semibold shadow-md hover:opacity-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-[var(--color-primary)]/40 transition">
-            Send Message
-          </button>
-        </form>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="px-6 py-10 bg-[var(--color-bg-dark)] text-center text-[var(--color-text-sub)]">
-      © 2025 Ramssen Sony — Built with ❤️ using Astro
     </footer>
-  </main>
 
-  <!-- Theme toggle script: stores preference in localStorage -->
-  <script is:inline>
-    const root = document.querySelector('main');
-    const btn = document.getElementById('theme-toggle');
-    // Default: dark; restore previous choice if present
-    const saved = localStorage.getItem('rs-theme');
-    if (saved) root.setAttribute('data-theme', saved);
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const button = document.getElementById("theme-toggle");
 
-    btn?.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('rs-theme', next);
-    });
-  </script>
-</Layout>
+        function syncTheme() {
+          const dark = root.dataset.theme === "dark";
+
+          button?.setAttribute(
+            "aria-label",
+            dark ? "Switch to light theme" : "Switch to dark theme"
+          );
+
+          button?.setAttribute("aria-pressed", String(dark));
+
+          document
+            .querySelector('meta[name="theme-color"]')
+            ?.setAttribute(
+              "content",
+              dark ? "#101b18" : "#f7f8f3"
+            );
+        }
+
+        syncTheme();
+
+        button?.addEventListener("click", () => {
+          root.dataset.theme =
+            root.dataset.theme === "dark" ? "light" : "dark";
+
+          try {
+            localStorage.setItem("rs-theme", root.dataset.theme);
+          } catch (_) {}
+
+          syncTheme();
+        });
+
+        document.querySelectorAll(".mobile-menu a").forEach((link) => {
+          link.addEventListener("click", () => {
+            document
+              .querySelector(".mobile-menu")
+              ?.removeAttribute("open");
+          });
+        });
+
+        document
+          .querySelector(".mobile-menu")
+          ?.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+              document
+                .querySelector(".mobile-menu")
+                ?.removeAttribute("open");
+
+              document
+                .querySelector(".mobile-menu > summary")
+                ?.focus();
+            }
+          });
+
+        document
+          .getElementById("copy-email")
+          ?.addEventListener("click", async () => {
+            const status = document.getElementById("copy-status");
+
+            try {
+              await navigator.clipboard.writeText(
+                "sonyramssen@outlook.com"
+              );
+
+              if (status) {
+                status.textContent = "Email address copied.";
+              }
+            } catch (_) {
+              if (status) {
+                status.textContent =
+                  "Select and copy: sonyramssen@outlook.com";
+              }
+            }
+          });
+
+        const year = document.getElementById("year");
+
+        if (year) {
+          year.textContent = String(new Date().getFullYear());
+        }
+      })();
+    </script>
+  </body>
+</html>
